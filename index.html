@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christ University</title>
+    <link href="index.css"  rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cambay&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="https://cis-india.org/Christuniversitylogocolour.jpg/image_preview" alt="" width="200" height="60" class="d-inline-block align-text-top">
+          </a>
+        <div >
+            <a href="register.html" class="a">Register</a>
+            <a href="login.html" class="a">Login</a>
+            <a href="index.html" class="a">Feedback</a>
+        </div>
+        </div>
+      </nav>
+    <form action="index.html" method="post" onsubmit="return validate()">
+        <p>Your details</p>
+        <input type="text" id="username" placeholder="Username" onkeydown="return user()">
+        <span></span>
+        <input type="text" id="address1" placeholder="Address line 1"><span></span> 
+        <input type="text" id="address2" placeholder="Address line 2"><span></span>
+        <input id="pin" type="text" onkeydown="return pin1()" placeholder="Pin code"><span></span>
+        <input type="text" id="email" placeholder="Email"><span></span>
+        <br><br>
+        <p>What you liked the most about the campus? </p>
+        <!-- <div class="checkboxContainer"> -->
+        <div class="checkbox">
+            <input type="checkbox" id="cb1" name="cb" value="student">
+            <label for="cb1">Student</label><br>
+        <!-- </div>
+        <div class="checkbox"> -->
+            <input type="checkbox" id="cb2" name="cb" value="location">
+            <label for="cb2">Location</label><br>
+        <!-- </div>
+        <div class="checkbox"> -->
+            <input type="checkbox" id="cb3" name="cb" value="campus">
+            <label for="cb3">Campus</label>
+        </div>
+
+        <div class="checkbox">
+            <input type="checkbox" id="cb4" name="cb" value="atmosphere">
+            <label for="cb4">Atmosphere</label><br>
+        <!-- </div>
+        <div class="checkbox"> -->
+            <input type="checkbox" id="cb5" name="cb" value="dorm_room">
+            <label for="cb5">Dorm rooms</label><br>
+        <!-- </div>
+        <div class="checkbox"> -->
+            <input type="checkbox" id="cb6" name="cb" value="sport">
+            <label for="cb6">Sport</label><br>
+        </div>
+        <!-- </div> -->
+        <br><br>
+        <p>How did you know about Christ?<p>
+        <div class="checkbox">
+        <input type="radio" value="friends" id="rb1" name="interest" >
+        <label for="rb1">Friends</label><br>
+
+        <input type="radio" value="television" id="rb2" name="interest">
+        <label for="rb2">Television</label><br>
+        </div>
+        <div class="checkbox">
+        <input type="radio" value="internet" id="rb3" name="interest">
+        <label for="rb3">Internet</label><br>
+
+        <input type="radio" value="others" id="rb4" name="interest">
+        <label for="rb4">Others</label>
+        </div>
+        <br><br>
+        <p>Additional comments</p>
+        <textarea placeholder="Optional" rows="7" cols="35"></textarea>
+        <br><br>
+
+        <input class="button" type="submit" value="SUBMIT">
+        <input class="button" type="button" onclick="window.location.reload()" value="RESET">
+
+    </form> 
+
+    <script>
+        function user() {
+            var letter = event.which;
+            var x=document.getElementById("username").value;
+            var y=x.length;
+            if(letter > 64 && letter < 91 || letter==8 ||letter==32)
+            { if(x.charAt(y-1)==' ' && letter==32)
+              {   return false;}
+              return true;
+            }
+            else
+                return false;
+        }
+
+        function pin1() {
+            var num = event.which;
+            if(num > 95 && num < 106 || num==8 || num==13 || num==32|| num==144 )
+                return true;
+            else
+                return false;
+        }
+
+        function validate(){
+            var cb=document.getElementsByTagName('input[type=checkbox');
+            var username=document.getElementById('username').value.trim();
+            var add1=document.getElementById('address1').value.trim();
+            var add2=document.getElementById('address2').value.trim();
+            var email=document.getElementById('email').value.trim();
+            var pin=document.getElementById('pin').value.trim();
+
+            var rb1=document.getElementById('rb1');
+            var rb2=document.getElementById('rb2');
+            var rb3=document.getElementById('rb3');
+            var rb4=document.getElementById('rb4');
+
+            var cb1=document.getElementById('cb1');
+            var cb2=document.getElementById('cb2');
+            var cb3=document.getElementById('cb3');
+            var cb4=document.getElementById('cb4');
+            var cb5=document.getElementById('cb5');
+            var cb6=document.getElementById('cb6');
+
+
+            var p= document.getElementsByTagName("p");
+            var span= document.getElementsByTagName("span");
+            var inputs=document.getElementsByTagName("input");
+            var flag=0;
+
+            const re_name=/^([A-Za-z]+)|([A-Za-z]+ [A-Za-z]+)$/;
+            const re_mail=/^([A-Za-z\.]{3,})@christuniversity\.((in|com))$/;
+            const re_pin=/^([0-9]{6})|([0-9]{3} [0-9]{3})$/ ;
+           
+            // VALIDATE USERNAME
+            if(username.trim().length!=0 && re_name.test(username) && (username.length<61 && username.length>2)){
+                span[0].innerText="";
+                inputs[0].style.border="1px solid black";
+                flag+=1;
+            }else{
+                span[0].innerText="Please enter your name.";
+                span[0].style.color="red";
+                inputs[0].style.border="3px solid red";
+            }
+            //VLIDATE ADDRESS LINE 1
+            if(add1.length!=0 && (add1.length<30 && add1.length>9) ){
+                span[1].innerText="";
+                inputs[1].style.border="1px solid black";
+                flag+=1;
+            }else{
+                span[1].innerText="Please enter address line 1.";
+                span[1].style.color="red";
+                inputs[1].style.border="3px solid red";
+            }
+            //VALIDATE ADDRESS LINE 2
+            if(add2.length!=0 && (add2.length<30 && add2.length>9) ){
+                span[2].innerText="";
+                inputs[2].style.border="1px solid black";
+                flag+=1;
+            }else{
+                span[2].innerText="Please enter address line 2.";
+                span[2].style.color="red";
+                inputs[2].style.border="3px solid red";
+            }
+            // VALIDATE PIN CODE
+            if(re_pin.test(pin)){
+                span[3].innerText="";
+                inputs[3].style.border="1px solid black";
+                flag+=1;
+            }else{
+                span[3].innerText="Please enter 6 digit valid pin code.";
+                span[3].style.color="red";
+                inputs[3].style.border="3px solid red";
+            }
+            // VALIDATE EMAIL 
+            if(re_mail.test(email)){
+                span[4].innerText="";
+                inputs[4].style.border="1px solid black";
+                flag+=1;
+            }else{
+                span[4].innerText="Please enter an official email";
+                span[4].style.color="red";
+                inputs[4].style.border="3px solid red";
+            }
+
+            if(rb1.checked ||rb2.checked ||rb3.checked ||rb4.checked ){
+                flag+=1;
+                p[2].style.color="#0d2e75";
+            }else{
+                p[2].style.color='red';
+            }
+
+            if(cb1.checked || cb2.checked || cb3.checked || cb4.checked || cb5.checked || cb6.checked  ){
+                flag+=1;
+                p[1].style.color="#0d2e75";
+            }else{
+                p[1].style.color='red';
+            }
+
+            if(flag==7){
+              
+                alert("FEEDBACK SUBMITTED SUCCESSFULLY!!!");            
+                return true;
+            }else{
+                return false;
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>
